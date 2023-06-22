@@ -1,0 +1,27 @@
+<%- include('header') -%>
+    <div class="box">
+    <h1 id="heading">  <%=listTitle%> </h1>
+</div>
+ <div class="box">
+    <!-- to find js to ejs ,simply write the js in the tag specified by ejs(< js_code %>) -->
+                <% taskItem.forEach(function(item){ %>
+<!-- to post the data from the ejs to the server we send it as form data -->
+<!-- to trigger this form we add the onchange attribute to the input,as soon as checkbox is checked it post the form data on to the specific server route -->
+<!-- to pass the list name as well as the task id we use two input and of checkbox type and send of hidden -->
+<!-- hidden input means not explicit input tag ,used to send another data to the server along with others -->
+                    <form action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()">
+                        <p> <%= item.name %>    <!--since we want to substitute value in it-->
+                        <input type="hidden" name="listName" value="<%=listTitle%>" ></input>
+                    </p>
+                    </div>
+                </form>
+                    <% }) %>
+                    <form action="/" method="post" class="item">
+                        <input type="text" name="taskName" placeholder="newItem" autocomplete="off">
+                        <button type="submit" name="listName" value= "<%=listTitle%>" >+</button>
+                    </form>
+                </div>
+    <!-- posting of form data on the server home route when the button is clicked -->
+    <%- include('footer') -%>
