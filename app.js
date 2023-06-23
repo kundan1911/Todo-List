@@ -13,7 +13,12 @@ const date=require(__dirname + "/views/date.js")
 const app=express()
 // to let the mongoose access the local mongospace
 // if todoDB absent create new,else use the existing
-mongoose.connect("mongodb+srv://admin-kundan:Test123@cluster0.0qyqn.mongodb.net/todoDB")
+mongoose.connect("mongodb+srv://admin-kundan:Kundan%4019@cluster0.0qyqn.mongodb.net/TodoDB?retryWrites=true&w=majority");
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error: "));
+db.once("open", function () {
+  console.log("Connected successfully");
+});
 // make the server ,set a ejs file at the background which would be 
 // used for templating(structure with dynamic data)
 app.set('view engine', 'ejs');
